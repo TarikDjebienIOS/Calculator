@@ -77,7 +77,7 @@
 
 + (NSString *)descriptionOfProgram:(id)program
 {
-    return @"Implements this in assignement 2";
+    return @"TODO Implements this in assignement 2";
 }
 
 - (NSString *)description 
