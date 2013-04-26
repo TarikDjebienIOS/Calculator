@@ -52,8 +52,4 @@
     self.display.text = resultString;
 }
 
-- (IBAction)pressShowProgram {
-    self.displayProgram.text = @"program description";
-}
-
 @end
