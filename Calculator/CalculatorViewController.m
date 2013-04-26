@@ -17,6 +17,7 @@
 @implementation CalculatorViewController
 
 @synthesize display = _display;
+@synthesize displayProgram = _displayProgram;
 @synthesize userIsInTheMiddleOfEnteringANumber = _userIsInTheMiddleOfEnteringANumber;
 @synthesize brain = _brain;
 
@@ -51,6 +52,8 @@
     self.display.text = resultString;
 }
 
-
+- (IBAction)pressShowProgram {
+    self.displayProgram.text = @"program description";
+}
 
 @end

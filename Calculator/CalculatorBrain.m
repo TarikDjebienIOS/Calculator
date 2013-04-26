@@ -77,7 +77,9 @@
 
 + (NSString *)descriptionOfProgram:(id)program
 {
-    return @"TODO Implements this in assignement 2";
+    NSString *description = @"";
+    NSString *programDescription = [NSString stringWithFormat:@"Description du programme : =%@",description];
+    return programDescription;
 }
 
 - (NSString *)description 
