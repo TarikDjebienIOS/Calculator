@@ -25,10 +25,6 @@
     return _brain;
 }
 
-- (void) setBrain:(CalculatorBrain *)brain
-{
-    _brain = brain;
-}
 
 - (IBAction)digitPressed:(UIButton *)sender {
     
