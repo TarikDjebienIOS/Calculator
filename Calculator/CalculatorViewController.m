@@ -48,8 +48,10 @@
     
     if(self.userIsInTheMiddleOfEnteringANumber) [self pressEnter];
     double result = [self.brain performOperation:sender.currentTitle];
+    NSString *description = [CalculatorBrain descriptionOfProgram:[self.brain program]];
     NSString *resultString = [NSString stringWithFormat:@"%g", result];
     self.display.text = resultString;
+    self.displayProgram.text = description;
 }
 
 @end

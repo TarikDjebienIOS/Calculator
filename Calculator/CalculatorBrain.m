@@ -75,11 +75,44 @@
     return [self popOperandOffStack:stack];
 }
 
++ (NSString *) buildDescriptionProgram:(NSMutableArray *) stack
+               descriptionProgram:(NSString *)description
+{
+    id topOfStack = [stack lastObject];
+    if(topOfStack) [stack removeLastObject];
+    
+    if ([topOfStack isKindOfClass:[NSNumber class]]) {
+        description = [[topOfStack stringValue] stringByAppendingString:description];
+    } else if ([topOfStack isKindOfClass:[NSString class]]){
+        NSString *operation = topOfStack;
+        
+        if([operation isEqualToString:@"+"]){
+            description = [NSString stringWithFormat:@"%@%@%@%@%@",@"(",[self buildDescriptionProgram:stack descriptionProgram:description],@"+",[self buildDescriptionProgram:stack descriptionProgram:description],@")"];
+        } else if ([@"*" isEqualToString:operation]){
+            description = [NSString stringWithFormat:@"%@%@%@",[self buildDescriptionProgram:stack descriptionProgram:description],@"*",[self buildDescriptionProgram:stack descriptionProgram:description]];
+        } else if ([@"-" isEqualToString:operation]){
+            NSString *operande1 = [self buildDescriptionProgram:stack descriptionProgram:description];
+            NSString *operande2 = [self buildDescriptionProgram:stack descriptionProgram:description];
+            description = [NSString stringWithFormat:@"%@%@%@%@%@",@"(",operande2,@"-",operande1,@")"];
+        } else if ([@"/" isEqualToString:operation]){
+            NSString *operande1 = [self buildDescriptionProgram:stack descriptionProgram:description];
+            NSString *operande2 = [self buildDescriptionProgram:stack descriptionProgram:description];
+            description = [NSString stringWithFormat:@"%@%@%@",operande2,@"/",operande1];
+        }
+    }
+    
+    return description;
+}
+
 + (NSString *)descriptionOfProgram:(id)program
 {
-    NSString *description = @"";
-    NSString *programDescription = [NSString stringWithFormat:@"Description du programme : =%@",description];
-    return programDescription;
+    
+    NSMutableArray *stack;
+    if ([program isKindOfClass:[NSArray class]]) {
+        stack = [program mutableCopy];
+    }
+    
+    return [NSString stringWithFormat:@"Description du programme : \n %@",[self buildDescriptionProgram:stack descriptionProgram:@""]];
 }
 
 - (NSString *)description 
